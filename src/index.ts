@@ -1,3 +1,5 @@
-export function greet(name: string): string {
-    return `Hello, ${name}!`;
+const test = function() {
+    alert("test")
 }
+
+export { test }
