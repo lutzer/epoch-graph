@@ -1,5 +1,5 @@
 type FigureJson = {
-    "name" : String 
+    "name" : string 
 }
 
 export type { FigureJson }
