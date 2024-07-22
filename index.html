@@ -7,11 +7,14 @@
     <title>Epoch Graph Test</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="figure"></div>
     <script type="module">
-      import { Chart } from './src/index.ts';
-      var chart = new Chart()
-      chart.test()
+      import { Figure } from './src/index.ts';
+      import test_json from './test/mocks/test.json'
+
+      var figure = new Figure(document.getElementById('figure'))
+      figure.loadJson(test_json)
+      figure.show()
     </script>
   </body>
 </html>

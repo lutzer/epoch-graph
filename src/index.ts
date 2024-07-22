@@ -1,3 +1,3 @@
 
 
-export { Chart } from "./components/Chart"
+export { Figure } from "./components/Figure.ts"
