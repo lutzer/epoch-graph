@@ -1,5 +1,5 @@
 class Chart {
-    public static test() {
+    public test() {
         alert("test")
     }
 }
