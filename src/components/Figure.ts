@@ -1,39 +1,38 @@
-import { BaseRenderer } from '../renderers/BaseRenderer';
-import { D3Renderer } from '../renderers/D3Renderer';
-import { FigureJson } from '../schemas/FigureJson';
-import { Axis } from './Axis';
-import { BaseComponent } from './BaseComponent';
-import { Plot } from './Plot';
+import { BaseRenderer } from '../renderers/BaseRenderer'
+import { D3Renderer } from '../renderers/d3/D3Renderer'
+import { FigureData } from '../schemas/FigureData'
+import { BaseComponent } from './BaseComponent'
+import { Plot } from './Plot'
 
-class Figure implements BaseComponent {
-  container: HTMLElement;
-  renderer: BaseRenderer;
+class Figure extends BaseComponent<FigureData> {
+  engine: BaseRenderer
+  plots: Plot[] = []
 
-  plots: Plot[]
-  axis: Axis[]
-  
-  title: string = ""
-
-  constructor(container: HTMLElement, renderer: BaseRenderer = new D3Renderer()) {
-    this.renderer = renderer;
-    this.container = container;
-    this.plots = []
-    this.axis = []
+  constructor(
+    container: HTMLElement,
+    engine: typeof BaseRenderer = D3Renderer
+  ) {
+    super()
+    this.engine = new engine(container)
   }
 
-  public loadJson(json: FigureJson) {
-    console.log(json);
+  get width() {
+    return this._data?.width ?? 512
+  }
+  get height() {
+    return this._data?.height ?? 512
   }
 
-  setup() {
-    
+  public fromJson(json: FigureData): Figure {
+    this._data = json
+    this.plots = json.axes.map((p) => new Plot(this).fromJson(p))
+    return this
   }
 
-  draw(): void {
-    this.renderer.getFigureRenderer().render(this);
-    this.plots.forEach(p => p.draw(this.renderer))
-    this.axis.forEach(p => p.draw(this.renderer))
+  show(): void {
+    this.engine.setup(this)
+    this.engine.update(this)
   }
 }
 
-export { Figure };
+export { Figure }

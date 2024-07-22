@@ -1,7 +1,8 @@
-import { BaseRenderer } from "../renderers/BaseRenderer";
+import { BaseData } from '../schemas/FigureData'
 
-interface BaseComponent {
-  draw(renderer: BaseRenderer): void;
+abstract class BaseComponent<T extends BaseData> {
+  protected _data: T | null = null
+  abstract fromJson(data: T): BaseComponent<T>
 }
 
-export type { BaseComponent };
+export { BaseComponent }

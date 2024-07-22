@@ -1,1 +1,1 @@
-export { Figure } from './components/Figure.ts';
+export { Figure } from './components/Figure.ts'

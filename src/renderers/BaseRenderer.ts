@@ -1,17 +1,16 @@
+import { Figure } from '../components/Figure'
 
-import { Axis } from "../components/Axis";
-import { BaseComponent } from "../components/BaseComponent";
-import { Figure } from "../components/Figure";
-import { Plot } from "../components/Plot";
+class BaseRenderer {
+  constructor(private container: HTMLElement) {}
 
-abstract class BaseRenderer{
-    abstract getFigureRenderer() : BaseComponentRenderer<Figure>
-    abstract getPlotRenderer() : BaseComponentRenderer<Plot>
-    abstract getAxisRenderer() : BaseComponentRenderer<Axis>
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setup(figure: Figure) {}
+
+  update() {
+    throw new Error(
+      'Method not implemented. No renderer defined to render figure: ' + figure
+    )
+  }
 }
 
-abstract class BaseComponentRenderer<T extends BaseComponent> {
-    abstract render(component: T) : void
-}
-
-export { BaseRenderer, BaseComponentRenderer }
+export { BaseRenderer }

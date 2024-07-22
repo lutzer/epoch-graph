@@ -10,11 +10,11 @@
     <div id="figure"></div>
     <script type="module">
       import { Figure } from './src/index.ts';
-      import test_json from './test/mocks/test.json'
+      import chart1_json from './test/mocks/chart1.json'
 
       var figure = new Figure(document.getElementById('figure'))
-      figure.loadJson(test_json)
-      figure.draw()
+      figure.fromJson(chart1_json)
+      figure.show()
     </script>
   </body>
 </html>

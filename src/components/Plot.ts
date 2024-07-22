@@ -1,17 +1,21 @@
-import { BaseRenderer } from "../renderers/BaseRenderer";
-import { BaseComponent } from "./BaseComponent";
-import { Figure } from "./Figure";
+import { PlotData } from '../schemas/FigureData'
+import { Axis } from './Axis'
+import { BaseComponent } from './BaseComponent'
+import { Figure } from './Figure'
 
-class Plot implements BaseComponent {
-    parent: Figure
+class Plot extends BaseComponent<PlotData> {
+  axes: Axis[] = []
+  title: string = 'Test'
 
-    constructor(parent: Figure) {
-        this.parent = parent;
-    }
+  fromJson(json: PlotData): Plot {
+    this._data = json
+    this.axes = json.axes.map((a) => new Axis(this).fromJson(a))
+    return this
+  }
 
-    draw(renderer: BaseRenderer): void {
-        renderer.getPlotRenderer().render(this);
-    }
+  constructor(public parent: Figure) {
+    super()
+  }
 }
 
 export { Plot }
