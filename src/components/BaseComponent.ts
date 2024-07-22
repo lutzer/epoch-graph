@@ -1,0 +1,4 @@
+interface BaseComponent {
+
+    draw();
+}
