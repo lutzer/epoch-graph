@@ -1,5 +1,5 @@
 type FigureJson = {
-    "name" : string 
-}
+  name: string;
+};
 
-export type { FigureJson }
+export type { FigureJson };

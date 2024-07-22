@@ -7,13 +7,17 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "npx eslint src/*"
+    "lint": "npx eslint src/*",
+    "format": "npx prettier --write src/*"
   },
   "devDependencies": {
     "@eslint/js": "^9.7.0",
     "@types/node": "^20.14.10",
     "eslint": "^9.7.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.8.0",
+    "prettier": "^3.3.3",
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.16.1",
     "vite": "^5.3.1",

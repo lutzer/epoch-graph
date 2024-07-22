@@ -1,4 +1,7 @@
-interface BaseComponent {
+import { BaseRenderer } from "../renderers/BaseRenderer";
 
-    draw();
+interface BaseComponent {
+  draw(renderer: BaseRenderer): void;
 }
+
+export type { BaseComponent };
