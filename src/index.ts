@@ -1,5 +1,3 @@
-const test = function() {
-    alert("test")
-}
 
-export { test }
+
+export { Chart } from "./components/Chart"

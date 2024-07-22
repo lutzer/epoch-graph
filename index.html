@@ -4,10 +4,23 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Epoch Graph Test</title>
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+    <script>
+      // Configure RequireJS
+      require.config({
+        paths: {
+          'epochGraph': '/dist/epoch-graph.umd'
+        }
+      });
+    </script>
+    <script>
+      require(['epochGraph'], function (EpochGraph) {
+        EpochGraph.test()
+      })
+    </script>
   </body>
 </html>
