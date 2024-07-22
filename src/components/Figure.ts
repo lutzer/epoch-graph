@@ -1,8 +1,10 @@
 import { FigureJson } from "../schemas/FigureJson";
+import { BaseComponent } from "./BaseComponent";
 
-class Figure {
+class Figure implements BaseComponent {
 
-    container : HTMLElement;
+    container : HTMLElement
+    axis: Axis[]
 
 
     constructor(container: HTMLElement) {
@@ -13,8 +15,9 @@ class Figure {
         console.log(json)
     }
 
-    public show() {
 
+    draw(): void {
+        this.container.htm
     }
 }
 
