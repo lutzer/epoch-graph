@@ -1,5 +1,5 @@
 import { ScaleLinear, scaleLinear, scaleLog } from 'd3-scale'
-import { AxisScaleType, CanvasScale } from '../models/FigureData'
+import { AxisScaleType } from '../models/FigureData'
 
 class scale {
   static generateTicks(domain: [number, number], numberOfTicks: number) {

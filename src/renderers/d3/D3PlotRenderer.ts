@@ -6,7 +6,11 @@ import { D3LinePlot } from './plots/D3LinePlot'
 
 class D3PlotRenderer extends D3ComponentRenderer<Plot> {
   create(parent: SVGGElement): D3ComponentRenderer<Plot> {
-    this.svg = d3.select(parent).append('g').attr('class', 'plot').node()
+    this.svg = d3
+      .select(parent)
+      .append('g')
+      .attr('class', `plot ${this.component.data.type}`)
+      .node()
     return this
   }
   update(): void {

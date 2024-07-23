@@ -11,7 +11,11 @@ class D3CanvasRenderer extends D3ComponentRenderer<Canvas> {
 
   create(parent: SVGGElement): D3CanvasRenderer {
     this.svg = d3.select(parent).append('svg').attr('class', 'canvas').node()
-    this.bg = d3.select(this.svg).append('rect').node()
+    this.bg = d3
+      .select(this.svg)
+      .append('rect')
+      .attr('class', 'canvas-background')
+      .node()
 
     this.axisRenderers = this.component.axes.map((axis) =>
       new D3AxisRenderer(axis).create(this.svg!)

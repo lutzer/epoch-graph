@@ -7,8 +7,17 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
   grid: SVGGElement | null = null
 
   create(parent: SVGGElement): D3AxisRenderer {
-    this.svg = d3.select(parent).append('g').attr('class', 'axis').node()
-    this.grid = d3.select(this.svg).append('g').attr('class', 'grid').node()
+    const classprefix = this.component.coord == 1 ? 'x' : 'y'
+    this.svg = d3
+      .select(parent)
+      .append('g')
+      .attr('class', `axis ${classprefix}-axis`)
+      .node()
+    this.grid = d3
+      .select(this.svg)
+      .append('g')
+      .attr('class', `grid ${classprefix}-grid`)
+      .node()
     return this
   }
   update() {
@@ -17,7 +26,10 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
       `translate(${this.component.position[0]},${this.component.position[1]})`
     )
     const ticks = this.component.ticks
-    const range = [0, this.component.size[this.component.coord]]
+    const range =
+      this.component.coord == 0
+        ? [0, this.component.size[this.component.coord]]
+        : [this.component.size[this.component.coord], 0]
 
     const scale =
       this.component.scale.scaleType == AxisScaleType.LINEAR

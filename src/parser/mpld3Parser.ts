@@ -26,7 +26,7 @@ function parseCanvas(json: Mpld3Data, canvasIndex: number): CanvasData {
     axes: json.axes[canvasIndex].axes.map((_, i) =>
       parseAxis(json, canvasIndex, i)
     ),
-    background: '#00000011',
+    background: json.axes[canvasIndex].axesbg || 'transparent',
     plots: parsePlots(json, canvasIndex),
     xScale: {
       domain: json.axes[canvasIndex].xdomain,
@@ -57,7 +57,7 @@ function parseAxis(
     position: parsePosition(axisData.position),
     grid: {
       visible: axisData.grid.gridOn,
-      color: axisData.grid.color
+      color: axisData.grid.color || 'black'
     },
     ticks: {
       numberOfTicks: axisData.nticks
