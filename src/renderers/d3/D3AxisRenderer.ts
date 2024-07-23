@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import { D3ComponentRenderer } from './D3BaseComponentRenderer'
 import { Axis } from '../../components/Axis'
-import { AxisPosition, AxisScale } from '../../models/FigureData'
+import { AxisPosition, AxisScaleType } from '../../models/FigureData'
 
 class D3AxisRenderer extends D3ComponentRenderer<Axis> {
   grid: SVGGElement | null = null
@@ -20,9 +20,9 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
     const range = [0, this.component.size[this.component.coord]]
 
     const scale =
-      this.component.scale == AxisScale.LINEAR
-        ? d3.scaleLinear().range(range).domain(this.component.domain)
-        : d3.scaleLog().range(range).domain(this.component.domain)
+      this.component.scale.scaleType == AxisScaleType.LINEAR
+        ? d3.scaleLinear().range(range).domain(this.component.scale.domain)
+        : d3.scaleLog().range(range).domain(this.component.scale.domain)
 
     const axisGenerator = this.axisPositionFunc()
     const axisSvg = axisGenerator(scale).tickValues(ticks).tickSizeOuter(0)

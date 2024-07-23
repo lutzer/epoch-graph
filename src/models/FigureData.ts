@@ -1,3 +1,5 @@
+import { BasePlot } from './PlotData'
+
 type BaseData = object
 
 type FigureData = BaseData & {
@@ -11,23 +13,29 @@ type CanvasData = BaseData & {
   margins: [number, number, number, number] // top, right, bottom, left
   axes: AxisData[]
   background: string
+  plots: BasePlot[]
+  xScale: CanvasScale
+  yScale: CanvasScale
 }
 
 type AxisData = BaseData & {
   position: AxisPosition
-  scale: AxisScale
   grid: {
     visible: boolean
     color: string
   }
-  domain: [number, number]
-  lim: [number, number]
   ticks: {
     numberOfTicks: number
   }
 }
 
-enum AxisScale {
+type CanvasScale = {
+  scaleType: AxisScaleType
+  domain: [number, number]
+  lim: [number, number]
+}
+
+enum AxisScaleType {
   LINEAR,
   LOGARITHMIC
 }
@@ -39,5 +47,5 @@ enum AxisPosition {
   RIGHT
 }
 
-export type { BaseData, FigureData, AxisData, CanvasData }
-export { AxisPosition, AxisScale }
+export type { BaseData, FigureData, AxisData, CanvasData, CanvasScale }
+export { AxisPosition, AxisScaleType }

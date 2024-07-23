@@ -1,6 +1,6 @@
-import { ticks } from '../helpers/ticks.ts'
+import { scale } from '../helpers/scale.ts'
 import { vectors } from '../helpers/vectors'
-import { AxisData, AxisPosition, AxisScale } from '../models/FigureData.ts'
+import { AxisData, AxisPosition, CanvasScale } from '../models/FigureData.ts'
 import { BaseComponent } from './BaseComponent'
 import { Canvas } from './Canvas.ts'
 import { RenderComponent } from './RenderComponent'
@@ -30,19 +30,15 @@ class Axis extends BaseComponent<AxisData> implements RenderComponent {
   }
 
   get ticks(): number[] {
-    return ticks.generateTicks(this.domain, this.data.ticks.numberOfTicks)
-  }
-
-  get domain(): [number, number] {
-    return this.data.domain
+    return scale.generateTicks(this.scale.domain, this.data.ticks.numberOfTicks)
   }
 
   get range(): [number, number] {
     return [0, 0]
   }
 
-  get scale(): AxisScale {
-    return this.data.scale
+  get scale(): CanvasScale {
+    return this.coord == 0 ? this.parent.xScale : this.parent.yScale
   }
 
   get axisPosition(): AxisPosition {

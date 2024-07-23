@@ -2,8 +2,9 @@ import { BaseRenderer } from '../renderers/BaseRenderer'
 import { D3Renderer } from '../renderers/d3/D3Renderer'
 import { FigureData } from '../models/FigureData'
 import { Canvas } from './Canvas'
-import { Mpld3Data, Mpld3Parser } from '../parser/mpld3Parser'
+import { Mpld3Parser } from '../parser/Mpld3Parser'
 import { RenderComponent } from './RenderComponent'
+import { Mpld3Data } from '../parser/Mpld3Data'
 
 class Figure implements RenderComponent {
   _data: FigureData | null = null
