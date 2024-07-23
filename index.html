@@ -9,11 +9,11 @@
   <body>
     <div id="figure"></div>
     <script type="module">
-      import { Figure } from './src/index.ts';
+      import { Figure } from './src/index.ts'
       import chart1_json from './test/mocks/chart1.json'
-
-      var figure = new Figure(document.getElementById('figure'))
-      figure.fromJson(chart1_json)
+      console.log(chart1_json)
+      var figure = Figure.d3(document.getElementById('figure'))
+      figure.fromMpld3(chart1_json)
       figure.show()
     </script>
   </body>

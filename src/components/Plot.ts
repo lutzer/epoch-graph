@@ -1,20 +1,24 @@
-import { PlotData } from '../schemas/FigureData'
+import { PlotData } from '../models/FigureData'
 import { Axis } from './Axis'
 import { BaseComponent } from './BaseComponent'
 import { Figure } from './Figure'
 
-class Plot extends BaseComponent<PlotData> {
+class Plot extends BaseComponent<PlotData> implements RenderComponent {
   axes: Axis[] = []
-  title: string = 'Test'
 
-  fromJson(json: PlotData): Plot {
-    this._data = json
-    this.axes = json.axes.map((a) => new Axis(this).fromJson(a))
-    return this
+  constructor(
+    data: PlotData,
+    public parent: Figure
+  ) {
+    super(data)
+    this.axes = data.axes.map((a) => new Axis(a, this))
   }
 
-  constructor(public parent: Figure) {
-    super()
+  get position(): [number, number] {
+    return this.parent.position
+  }
+  get size(): [number, number] {
+    return this.parent.size
   }
 }
 

@@ -1,5 +1,5 @@
 import { BaseComponent } from '../../components/BaseComponent'
-import { BaseData } from '../../schemas/FigureData'
+import { BaseData } from '../../models/FigureData'
 
 abstract class D3ComponentRenderer<T extends BaseComponent<BaseData>> {
   svg: SVGSVGElement | null = null
