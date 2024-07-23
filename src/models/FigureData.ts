@@ -8,7 +8,7 @@ type FigureData = BaseData & {
 
 type PlotData = BaseData & {
   title: string
-  margins: [number, number, number, number]
+  margins: [number, number, number, number] // top, right, bottom, left
   axes: AxisData[]
 }
 
@@ -17,7 +17,10 @@ type AxisData = BaseData & {
   scale: AxisScale
   grid: boolean
   domain: [number, number]
-  range: [number, number]
+  lim: [number, number]
+  ticks: {
+    numberOfTicks: number
+  }
 }
 
 enum AxisScale {

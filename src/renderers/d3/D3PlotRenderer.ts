@@ -14,9 +14,6 @@ class D3PlotRenderer extends D3ComponentRenderer<Plot> {
     return this
   }
   update() {
-    d3.select(this.svg)
-      .attr('width', this.component.size[0])
-      .attr('height', this.component.size[1])
     this.axisRenderers.forEach((r) => r.update())
   }
 }

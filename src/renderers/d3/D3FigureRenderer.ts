@@ -13,6 +13,7 @@ class D3FigureRenderer extends D3ComponentRenderer<Figure> {
     )
     return this
   }
+
   update() {
     d3.select(this.svg)
       .attr('x', this.component.position[0])

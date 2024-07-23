@@ -10,7 +10,10 @@ class Figure implements RenderComponent {
 
   plots: Plot[] = []
 
-  constructor(public engine: BaseRenderer) {}
+  constructor(
+    public engine: BaseRenderer,
+    public options: FigureOptions
+  ) {}
 
   get position(): [number, number] {
     return [0, 0]
@@ -28,8 +31,8 @@ class Figure implements RenderComponent {
     return this._data
   }
 
-  static d3(container: HTMLElement): Figure {
-    return new Figure(new D3Renderer(container))
+  static d3(container: HTMLElement, options: FigureOptions): Figure {
+    return new Figure(new D3Renderer(container), options)
   }
 
   fromMpld3(json: Mpld3Data) {
@@ -40,6 +43,10 @@ class Figure implements RenderComponent {
     this.engine.setup(this)
     this.engine.update()
   }
+}
+
+type FigureOptions = {
+  reponsive: boolean
 }
 
 export { Figure }

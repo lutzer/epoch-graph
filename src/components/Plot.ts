@@ -1,3 +1,4 @@
+import { vectors } from '../helpers/vectors'
 import { PlotData } from '../models/FigureData'
 import { Axis } from './Axis'
 import { BaseComponent } from './BaseComponent'
@@ -16,10 +17,16 @@ class Plot extends BaseComponent<PlotData> implements RenderComponent {
   }
 
   get position(): [number, number] {
-    return this.parent.position
+    return vectors.add(this.parent.position, [
+      this.data.margins[3],
+      this.data.margins[0]
+    ])
   }
   get size(): [number, number] {
-    return this.parent.size
+    return vectors.sub(this.parent.size, [
+      this.data.margins[3] + this.data.margins[1],
+      this.data.margins[0] + this.data.margins[2]
+    ])
   }
 }
 

@@ -10,7 +10,12 @@ class D3Renderer implements BaseRenderer {
   constructor(public container: HTMLElement) {}
 
   setup(figure: Figure): void {
-    this.svg = d3.select(this.container).append('svg').node()
+    this.svg = d3
+      .select(this.container)
+      .append('svg')
+      .attr('width', figure.size[0])
+      .attr('height', figure.size[1])
+      .node()
     this.figureRenderer = new D3FigureRenderer(figure).create(this.svg!)
   }
 

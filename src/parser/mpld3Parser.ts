@@ -19,7 +19,7 @@ class Mpld3Parser {
   static parsePlot(json: Mpld3Data, plotIndex: number): PlotData {
     return {
       title: 'Title',
-      margins: [0, 0, 0, 0],
+      margins: [40, 40, 40, 40],
       axes: json.axes[plotIndex].axes.map((_, i) =>
         this.parseAxis(json, plotIndex, i)
       )
@@ -37,17 +37,20 @@ class Mpld3Parser {
       position == AxisPosition.TOP || position == AxisPosition.BOTTOM
         ? json.axes[plotIndex].xdomain
         : json.axes[plotIndex].ydomain
-    const range =
+    const lim =
       position == AxisPosition.TOP || position == AxisPosition.BOTTOM
         ? json.axes[plotIndex].xlim
         : json.axes[plotIndex].ylim
     return {
       position: this.parsePosition(axisData.position),
       domain: domain,
-      range: range,
+      lim: lim,
       scale:
         axisData.scale == 'linear' ? AxisScale.LINEAR : AxisScale.LOGARITHMIC,
-      grid: axisData.grid.gridOn
+      grid: axisData.grid.gridOn,
+      ticks: {
+        numberOfTicks: axisData.nticks
+      }
     }
   }
 
