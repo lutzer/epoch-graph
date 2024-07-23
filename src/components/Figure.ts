@@ -21,6 +21,11 @@ class Figure implements RenderComponent {
   get size(): [number, number] {
     return [this.data?.width ?? 512, this.data?.height ?? 512]
   }
+  set size(size: [number, number]) {
+    if (this.data == null) return
+    this.data.width = size[0]
+    this.data.height = size[1]
+  }
 
   set data(data: FigureData) {
     this._data = data
