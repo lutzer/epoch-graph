@@ -4,15 +4,19 @@ import { Axis } from '../../components/Axis'
 import { AxisPosition, AxisScale } from '../../models/FigureData'
 
 class D3AxisRenderer extends D3ComponentRenderer<Axis> {
-  create(parent: SVGSVGElement): D3AxisRenderer {
-    this.svg = d3.select(parent).append('svg').attr('class', 'axis').node()
+  grid: SVGGElement | null = null
+
+  create(parent: SVGGElement): D3AxisRenderer {
+    this.svg = d3.select(parent).append('g').attr('class', 'axis').node()
+    this.grid = d3.select(this.svg).append('g').attr('class', 'grid').node()
     return this
   }
   update() {
-    d3.select(this.svg)
-      .attr('x', this.component.position[0])
-      .attr('y', this.component.position[1])
-
+    d3.select(this.svg).attr(
+      'transform',
+      `translate(${this.component.position[0]},${this.component.position[1]})`
+    )
+    const ticks = this.component.ticks
     const range = [0, this.component.size[this.component.coord]]
 
     const scale =
@@ -21,11 +25,40 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
         : d3.scaleLog().range(range).domain(this.component.domain)
 
     const axisGenerator = this.axisPositionFunc()
-    const axisSvg = axisGenerator(scale)
-      .tickValues(this.component.ticks)
-      .tickSizeOuter(0)
+    const axisSvg = axisGenerator(scale).tickValues(ticks).tickSizeOuter(0)
 
     d3.select(this.svg!).call(axisSvg)
+
+    // render grid
+    this.renderGrid(ticks, scale)
+  }
+
+  renderGrid(ticks: number[], scale: d3.ScaleLinear<number, number, never>) {
+    // generate lines for x axis
+    const p1: [number, number] = [0, 0]
+    const p2: [number, number] =
+      this.component.coord == 0
+        ? [0, -this.component.size[1]]
+        : [this.component.size[0], 0]
+
+    const line = d3
+      .line()
+      .x((d) => d[0])
+      .y((d) => d[1])([p1, p2])
+
+    d3.select(this.grid).selectAll('*').remove()
+    ticks.forEach((t) => {
+      d3.select(this.grid)
+        .append('path')
+        .attr('stroke', this.component.data.grid.color)
+        .attr(
+          'transform',
+          this.component.coord == 0
+            ? `translate(${scale(t)},0)`
+            : `translate(0, ${scale(t)})`
+        )
+        .attr('d', line)
+    })
   }
 
   axisPositionFunc(): <Domain extends d3.AxisDomain>(

@@ -19,10 +19,11 @@ class Mpld3Parser {
   static parsePlot(json: Mpld3Data, plotIndex: number): PlotData {
     return {
       title: 'Title',
-      margins: [40, 40, 40, 40],
+      margins: [40, 40, 40, 80],
       axes: json.axes[plotIndex].axes.map((_, i) =>
         this.parseAxis(json, plotIndex, i)
-      )
+      ),
+      background: '#00000011'
     }
   }
 
@@ -47,7 +48,10 @@ class Mpld3Parser {
       lim: lim,
       scale:
         axisData.scale == 'linear' ? AxisScale.LINEAR : AxisScale.LOGARITHMIC,
-      grid: axisData.grid.gridOn,
+      grid: {
+        visible: axisData.grid.gridOn,
+        color: axisData.grid.color
+      },
       ticks: {
         numberOfTicks: axisData.nticks
       }
@@ -80,6 +84,7 @@ type Mpld3Data = {
       visible: boolean
       grid: {
         gridOn: boolean
+        color: string
       }
     }[]
     xdomain: [number, number]

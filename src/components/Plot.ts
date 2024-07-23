@@ -24,7 +24,7 @@ class Plot extends BaseComponent<PlotData> implements RenderComponent {
   }
   get size(): [number, number] {
     return vectors.sub(this.parent.size, [
-      this.data.margins[3] + this.data.margins[1],
+      this.data.margins[1] + this.data.margins[3],
       this.data.margins[0] + this.data.margins[2]
     ])
   }

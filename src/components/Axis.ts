@@ -50,7 +50,10 @@ class Axis extends BaseComponent<AxisData> implements RenderComponent {
   }
 
   get coord(): number {
-    return this.data.position == AxisPosition.TOP || AxisPosition.BOTTOM ? 0 : 1
+    return this.data.position == AxisPosition.TOP ||
+      this.data.position == AxisPosition.BOTTOM
+      ? 0
+      : 1
   }
 }
 

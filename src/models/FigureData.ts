@@ -10,12 +10,16 @@ type PlotData = BaseData & {
   title: string
   margins: [number, number, number, number] // top, right, bottom, left
   axes: AxisData[]
+  background: string
 }
 
 type AxisData = BaseData & {
   position: AxisPosition
   scale: AxisScale
-  grid: boolean
+  grid: {
+    visible: boolean
+    color: string
+  }
   domain: [number, number]
   lim: [number, number]
   ticks: {

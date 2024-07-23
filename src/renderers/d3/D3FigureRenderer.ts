@@ -6,7 +6,7 @@ import { D3PlotRenderer } from './D3PlotRenderer'
 class D3FigureRenderer extends D3ComponentRenderer<Figure> {
   plotRenderers: D3PlotRenderer[] = []
 
-  create(parent: SVGSVGElement): D3FigureRenderer {
+  create(parent: SVGGElement): D3FigureRenderer {
     this.svg = d3.select(parent).append('svg').attr('class', 'figure').node()
     this.plotRenderers = this.component.plots.map((plot) =>
       new D3PlotRenderer(plot).create(this.svg!)
@@ -20,6 +20,7 @@ class D3FigureRenderer extends D3ComponentRenderer<Figure> {
       .attr('y', this.component.position[1])
       .attr('width', this.component.size[0])
       .attr('height', this.component.size[1])
+      .attr('viewBox', [0, 0, this.component.size[0], this.component.size[1]])
     this.plotRenderers.forEach((p) => p.update())
   }
 }
