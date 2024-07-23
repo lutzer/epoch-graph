@@ -1,7 +1,6 @@
-import { BaseComponent } from '../../components/BaseComponent'
-import { BaseData } from '../../models/FigureData'
+import { RenderComponent } from '../../components/RenderComponent'
 
-abstract class D3ComponentRenderer<T extends BaseComponent<BaseData>> {
+abstract class D3ComponentRenderer<T extends RenderComponent> {
   svg: SVGSVGElement | null = null
 
   constructor(public component: T) {}

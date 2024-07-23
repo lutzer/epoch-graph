@@ -1,6 +1,7 @@
 import { AxisData, AxisPosition } from '../models/FigureData'
-import { BaseComponent, RenderComponent } from './BaseComponent'
+import { BaseComponent } from './BaseComponent'
 import { Plot } from './Plot'
+import { RenderComponent } from './RenderComponent'
 
 class Axis extends BaseComponent<AxisData> implements RenderComponent {
   constructor(

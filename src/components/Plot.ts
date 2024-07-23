@@ -2,6 +2,7 @@ import { PlotData } from '../models/FigureData'
 import { Axis } from './Axis'
 import { BaseComponent } from './BaseComponent'
 import { Figure } from './Figure'
+import { RenderComponent } from './RenderComponent'
 
 class Plot extends BaseComponent<PlotData> implements RenderComponent {
   axes: Axis[] = []

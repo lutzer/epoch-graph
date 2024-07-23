@@ -1,10 +1,9 @@
 import { BaseRenderer } from '../renderers/BaseRenderer'
 import { D3Renderer } from '../renderers/d3/D3Renderer'
 import { FigureData } from '../models/FigureData'
-import { RenderComponent } from './BaseComponent'
 import { Plot } from './Plot'
 import { Mpld3Data, Mpld3Parser } from '../parser/mpld3Parser'
-import js from '@eslint/js'
+import { RenderComponent } from './RenderComponent'
 
 class Figure implements RenderComponent {
   _data: FigureData | null = null
