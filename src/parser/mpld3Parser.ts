@@ -3,7 +3,7 @@ import {
   AxisPosition,
   AxisScale,
   FigureData,
-  PlotData
+  CanvasData
 } from '../models/FigureData'
 
 class Mpld3Parser {
@@ -11,17 +11,17 @@ class Mpld3Parser {
     const figure: FigureData = {
       width: json.width,
       height: json.height,
-      plots: json.axes.map((_, i) => this.parsePlot(json, i))
+      canvases: json.axes.map((_, i) => this.parsePlot(json, i))
     }
     return figure
   }
 
-  static parsePlot(json: Mpld3Data, plotIndex: number): PlotData {
+  static parsePlot(json: Mpld3Data, canvasIndex: number): CanvasData {
     return {
       title: 'Title',
-      margins: [40, 40, 40, 80],
-      axes: json.axes[plotIndex].axes.map((_, i) =>
-        this.parseAxis(json, plotIndex, i)
+      margins: [20, 20, 20, 40],
+      axes: json.axes[canvasIndex].axes.map((_, i) =>
+        this.parseAxis(json, canvasIndex, i)
       ),
       background: '#00000011'
     }
@@ -29,19 +29,19 @@ class Mpld3Parser {
 
   static parseAxis(
     json: Mpld3Data,
-    plotIndex: number,
+    canvasIndex: number,
     axisIndex: number
   ): AxisData {
-    const axisData = json.axes[plotIndex].axes[axisIndex]
+    const axisData = json.axes[canvasIndex].axes[axisIndex]
     const position = this.parsePosition(axisData.position)
     const domain =
       position == AxisPosition.TOP || position == AxisPosition.BOTTOM
-        ? json.axes[plotIndex].xdomain
-        : json.axes[plotIndex].ydomain
+        ? json.axes[canvasIndex].xdomain
+        : json.axes[canvasIndex].ydomain
     const lim =
       position == AxisPosition.TOP || position == AxisPosition.BOTTOM
-        ? json.axes[plotIndex].xlim
-        : json.axes[plotIndex].ylim
+        ? json.axes[canvasIndex].xlim
+        : json.axes[canvasIndex].ylim
     return {
       position: this.parsePosition(axisData.position),
       domain: domain,

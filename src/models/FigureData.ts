@@ -3,10 +3,10 @@ type BaseData = object
 type FigureData = BaseData & {
   width: number
   height: number
-  plots: PlotData[]
+  canvases: CanvasData[]
 }
 
-type PlotData = BaseData & {
+type CanvasData = BaseData & {
   title: string
   margins: [number, number, number, number] // top, right, bottom, left
   axes: AxisData[]
@@ -39,5 +39,5 @@ enum AxisPosition {
   RIGHT
 }
 
-export type { BaseData, FigureData, AxisData, PlotData }
+export type { BaseData, FigureData, AxisData, CanvasData }
 export { AxisPosition, AxisScale }

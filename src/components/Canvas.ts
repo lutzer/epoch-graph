@@ -1,15 +1,15 @@
 import { vectors } from '../helpers/vectors'
-import { PlotData } from '../models/FigureData'
+import { CanvasData } from '../models/FigureData'
 import { Axis } from './Axis'
 import { BaseComponent } from './BaseComponent'
 import { Figure } from './Figure'
 import { RenderComponent } from './RenderComponent'
 
-class Plot extends BaseComponent<PlotData> implements RenderComponent {
+class Canvas extends BaseComponent<CanvasData> implements RenderComponent {
   axes: Axis[] = []
 
   constructor(
-    data: PlotData,
+    data: CanvasData,
     public parent: Figure
   ) {
     super(data)
@@ -30,4 +30,4 @@ class Plot extends BaseComponent<PlotData> implements RenderComponent {
   }
 }
 
-export { Plot }
+export { Canvas }

@@ -1,13 +1,13 @@
 import * as d3 from 'd3'
 import { D3ComponentRenderer } from './D3BaseComponentRenderer'
-import { Plot } from '../../components/Plot'
+import { Canvas } from '../../components/Canvas'
 import { D3AxisRenderer } from './D3AxisRenderer'
 
-class D3PlotRenderer extends D3ComponentRenderer<Plot> {
+class D3CanvasRenderer extends D3ComponentRenderer<Canvas> {
   axisRenderers: D3AxisRenderer[] = []
   bg: SVGRectElement | null = null
 
-  create(parent: SVGGElement): D3PlotRenderer {
+  create(parent: SVGGElement): D3CanvasRenderer {
     this.svg = d3.select(parent).append('svg').attr('class', 'plot').node()
     this.bg = d3.select(this.svg).append('rect').node()
 
@@ -27,4 +27,4 @@ class D3PlotRenderer extends D3ComponentRenderer<Plot> {
   }
 }
 
-export { D3PlotRenderer }
+export { D3CanvasRenderer }

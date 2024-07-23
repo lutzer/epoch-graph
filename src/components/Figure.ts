@@ -1,14 +1,14 @@
 import { BaseRenderer } from '../renderers/BaseRenderer'
 import { D3Renderer } from '../renderers/d3/D3Renderer'
 import { FigureData } from '../models/FigureData'
-import { Plot } from './Plot'
+import { Canvas } from './Canvas'
 import { Mpld3Data, Mpld3Parser } from '../parser/mpld3Parser'
 import { RenderComponent } from './RenderComponent'
 
 class Figure implements RenderComponent {
   _data: FigureData | null = null
 
-  plots: Plot[] = []
+  canvases: Canvas[] = []
 
   constructor(
     public engine: BaseRenderer,
@@ -29,7 +29,7 @@ class Figure implements RenderComponent {
 
   set data(data: FigureData) {
     this._data = data
-    this.plots = data.plots.map((p) => new Plot(p, this))
+    this.canvases = data.canvases.map((p) => new Canvas(p, this))
   }
 
   get data(): FigureData | null {

@@ -1,14 +1,14 @@
 import { ticks } from '../helpers/ticks.ts'
 import { vectors } from '../helpers/vectors'
-import { AxisData, AxisPosition, AxisScale } from '../models/FigureData'
+import { AxisData, AxisPosition, AxisScale } from '../models/FigureData.ts'
 import { BaseComponent } from './BaseComponent'
-import { Plot } from './Plot'
+import { Canvas } from './Canvas.ts'
 import { RenderComponent } from './RenderComponent'
 
 class Axis extends BaseComponent<AxisData> implements RenderComponent {
   constructor(
     data: AxisData,
-    public parent: Plot
+    public parent: Canvas
   ) {
     super(data)
   }
