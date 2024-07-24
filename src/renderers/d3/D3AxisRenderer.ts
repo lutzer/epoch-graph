@@ -46,6 +46,7 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
     const axisGenerator = this.axisPositionFunc()
     const axisSvg = axisGenerator(scale).tickValues(ticks).tickSizeOuter(0)
 
+    // calculate offsets for axis on bottom or right
     const xOffset =
       this.component.axisPosition == AxisPosition.RIGHT
         ? this.component.size[0]
@@ -76,19 +77,23 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
       .x((d) => d[0])
       .y((d) => d[1])([p1, p2])
 
-    d3.select(this.grid).selectAll('*').remove()
-    ticks.forEach((t) => {
-      d3.select(this.grid)
-        .append('path')
-        .attr('stroke', this.component.data.grid.color)
-        .attr(
-          'transform',
-          this.component.coord == 0
-            ? `translate(${scale(t)},0)`
-            : `translate(0, ${scale(t)})`
-        )
-        .attr('d', line)
-    })
+    const offsets = ticks.map((t) => ({
+      x: this.component.coord == 0 ? scale(t) : 0,
+      y: this.component.coord == 1 ? scale(t) : 0
+    }))
+
+    const gridLines = d3
+      .select(this.grid)
+      .selectAll<SVGPathElement, unknown>('path')
+      .data(offsets)
+
+    gridLines
+      .enter()
+      .append('path')
+      .merge(gridLines)
+      .attr('stroke', this.component.data.grid.color)
+      .attr('d', line)
+      .attr('transform', (d) => `translate(${d.x}, ${d.y})`)
   }
 
   axisPositionFunc(): <Domain extends d3.AxisDomain>(

@@ -43,7 +43,6 @@ class Figure implements RenderComponent {
 
   fromMpld3(json: Mpld3Data) {
     this.data = Mpld3Parser.parse(json)
-    console.log(this.data)
   }
 
   show(): void {

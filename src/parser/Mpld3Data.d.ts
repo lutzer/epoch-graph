@@ -50,6 +50,6 @@ type Collections = {
 }
 
 type Mpld3Position = 'top' | 'bottom' | 'left' | 'right'
-type Mpld3Scale = 'linear' | 'logarithmic'
+type Mpld3Scale = 'linear' | 'log'
 
 export type { Mpld3Data, Mpld3Position, Mpld3Scale }

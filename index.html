@@ -33,7 +33,11 @@
       var figure = Figure.d3(document.getElementById('figure-container'), {
         reponsive: true
       })
+
       figure.fromMpld3(json)
+
+      console.log(figure.data)
+
       figure.show()
     </script>
   </body>

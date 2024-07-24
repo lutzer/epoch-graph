@@ -1,9 +1,5 @@
 import * as d3 from 'd3'
-import {
-  DataPoint,
-  LinePlotData,
-  ScatterPlotData
-} from '../../../models/PlotData'
+import { ScatterPlotData } from '../../../models/PlotData'
 import { Plot } from '../../../components/Plot'
 import { D3BasePlot } from './D3BasePlot'
 
