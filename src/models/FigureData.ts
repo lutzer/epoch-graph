@@ -26,6 +26,7 @@ type AxisData = BaseData & {
   }
   ticks: {
     numberOfTicks: number
+    values: number[]
   }
 }
 

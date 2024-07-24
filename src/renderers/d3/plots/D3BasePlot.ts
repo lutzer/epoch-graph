@@ -1,6 +1,6 @@
 import { ScaleLinear } from 'd3-scale'
 import { Plot } from '../../../components/Plot'
-import { scale } from '../../../helpers/scale'
+import { scaleUtils } from '../../../helpers/scaleUtils'
 
 abstract class D3BasePlot {
   static getScale(
@@ -10,10 +10,10 @@ abstract class D3BasePlot {
     const range: [number, number] =
       coord == 0 ? [0, plot.size[coord]] : [plot.size[coord], 0]
 
-    return scale.createScale(
-      coord == 0 ? plot.parent.xScale.domain : plot.parent.yScale.domain,
+    return scaleUtils.createScale(
+      plot.parent.getDomain(coord),
       range,
-      coord == 0 ? plot.parent.xScale.scaleType : plot.parent.yScale.scaleType
+      plot.parent.getScale(coord).scaleType
     )
   }
 }

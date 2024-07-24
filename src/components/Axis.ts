@@ -1,6 +1,10 @@
-import { scale } from '../helpers/scale.ts'
-import { vectors } from '../helpers/vectors'
-import { AxisData, AxisPosition, CanvasScale } from '../models/FigureData.ts'
+import { scaleUtils } from '../helpers/scaleUtils.ts'
+import {
+  AxisData,
+  AxisPosition,
+  AxisScaleType,
+  CanvasScale
+} from '../models/FigureData.ts'
 import { BaseComponent } from './BaseComponent'
 import { Canvas } from './Canvas.ts'
 import { RenderComponent } from './RenderComponent'
@@ -22,11 +26,25 @@ class Axis extends BaseComponent<AxisData> implements RenderComponent {
   }
 
   get ticks(): number[] {
-    return scale.generateTicks(this.scale.domain, this.data.ticks.numberOfTicks)
+    return this.data.ticks.values.length > 0
+      ? this.data.ticks.values
+      : scaleUtils.generateTicks(
+          this.domain,
+          this.data.ticks.numberOfTicks,
+          this.scale.scaleType
+        )
+  }
+
+  isLogarithmic(): boolean {
+    return this.scale.scaleType == AxisScaleType.LOGARITHMIC
+  }
+
+  get domain(): [number, number] {
+    return this.parent.getDomain(this.coord)
   }
 
   get scale(): CanvasScale {
-    return this.coord == 0 ? this.parent.xScale : this.parent.yScale
+    return this.parent.getScale(this.coord)
   }
 
   get axisPosition(): AxisPosition {

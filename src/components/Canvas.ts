@@ -1,5 +1,5 @@
 import { vectors } from '../helpers/vectors'
-import { CanvasData, CanvasScale } from '../models/FigureData'
+import { AxisScaleType, CanvasData, CanvasScale } from '../models/FigureData'
 import { Axis } from './Axis'
 import { BaseComponent } from './BaseComponent'
 import { Figure } from './Figure'
@@ -32,12 +32,18 @@ class Canvas extends BaseComponent<CanvasData> implements RenderComponent {
     ])
   }
 
-  get xScale(): CanvasScale {
-    return this.data.xScale
+  getDomain(coord: number): [number, number] {
+    const scale = this.getScale(coord)
+    if (
+      scale.scaleType == AxisScaleType.LOGARITHMIC &&
+      (scale.domain[0] <= 0 || scale.domain[1] <= 0)
+    )
+      throw Error('domain for log plot must be positive')
+    return scale.domain
   }
 
-  get yScale(): CanvasScale {
-    return this.data.yScale
+  getScale(coord: number): CanvasScale {
+    return coord == 0 ? this.data.xScale : this.data.yScale
   }
 }
 

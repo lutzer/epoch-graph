@@ -40,11 +40,18 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
 
     const scale =
       this.component.scale.scaleType == AxisScaleType.LINEAR
-        ? d3.scaleLinear().range(range).domain(this.component.scale.domain)
-        : d3.scaleLog().range(range).domain(this.component.scale.domain)
+        ? d3.scaleLinear().range(range).domain(this.component.domain)
+        : d3.scaleLog().range(range).domain(this.component.domain)
 
     const axisGenerator = this.axisPositionFunc()
-    const axisSvg = axisGenerator(scale).tickValues(ticks).tickSizeOuter(0)
+    const axisSvg = axisGenerator(scale)
+      .tickValues(ticks)
+      .tickSizeOuter(0)
+      .tickFormat((v) => {
+        return this.component.isLogarithmic()
+          ? new Number(v).toExponential(1)
+          : v.toString()
+      })
 
     // calculate offsets for axis on bottom or right
     const xOffset =

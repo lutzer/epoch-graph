@@ -22,6 +22,7 @@ type Axes = {
   position: Mpld3Position
   scale: Mpld3Scale
   nticks: number
+  tickvalues: number[]
   tickformat_formatter: string
   visible: boolean
   grid: {
