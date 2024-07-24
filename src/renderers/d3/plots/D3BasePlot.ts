@@ -3,14 +3,17 @@ import { Plot } from '../../../components/Plot'
 import { scale } from '../../../helpers/scale'
 
 abstract class D3BasePlot {
-  static getScale(plot: Plot, dim: number): ScaleLinear<number, number, never> {
+  static getScale(
+    plot: Plot,
+    coord: number
+  ): ScaleLinear<number, number, never> {
     const range: [number, number] =
-      dim == 0 ? [0, plot.size[dim]] : [plot.size[dim], 0]
+      coord == 0 ? [0, plot.size[coord]] : [plot.size[coord], 0]
 
     return scale.createScale(
-      dim == 0 ? plot.parent.xScale.domain : plot.parent.yScale.domain,
+      coord == 0 ? plot.parent.xScale.domain : plot.parent.yScale.domain,
       range,
-      dim == 0 ? plot.parent.xScale.scaleType : plot.parent.yScale.scaleType
+      coord == 0 ? plot.parent.xScale.scaleType : plot.parent.yScale.scaleType
     )
   }
 }

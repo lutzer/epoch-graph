@@ -27,7 +27,7 @@ class D3Renderer implements BaseRenderer {
   onResize = () => {
     const rect = this.container.getBoundingClientRect()
     this.figureRenderer?.resize(rect.width, rect.height)
-    this.update()
+    this.figureRenderer?.update()
   }
 }
 

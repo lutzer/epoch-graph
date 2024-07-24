@@ -33,10 +33,6 @@ class Axis extends BaseComponent<AxisData> implements RenderComponent {
     return scale.generateTicks(this.scale.domain, this.data.ticks.numberOfTicks)
   }
 
-  get range(): [number, number] {
-    return [0, 0]
-  }
-
   get scale(): CanvasScale {
     return this.coord == 0 ? this.parent.xScale : this.parent.yScale
   }
@@ -45,6 +41,7 @@ class Axis extends BaseComponent<AxisData> implements RenderComponent {
     return this.data.position
   }
 
+  // returns if this axis defines the x coord = 0 or the y coord = 1
   get coord(): number {
     return this.data.position == AxisPosition.TOP ||
       this.data.position == AxisPosition.BOTTOM

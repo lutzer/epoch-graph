@@ -1,11 +1,11 @@
-import { BasePlot, PlotType } from '../models/PlotData'
+import { BasePlotData, PlotType } from '../models/PlotData'
 import { BaseComponent } from './BaseComponent'
 import { Canvas } from './Canvas'
 import { RenderComponent } from './RenderComponent'
 
-class Plot extends BaseComponent<BasePlot> implements RenderComponent {
+class Plot extends BaseComponent<BasePlotData> implements RenderComponent {
   constructor(
-    data: BasePlot,
+    data: BasePlotData,
     public parent: Canvas
   ) {
     super(data)

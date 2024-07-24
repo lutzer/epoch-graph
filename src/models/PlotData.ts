@@ -1,18 +1,19 @@
 import { BaseData } from './FigureData'
 
-type BasePlot = BaseData & {
+type BasePlotData = BaseData & {
   points: DataPoint[]
   type: PlotType
 }
 
-type ScatterPlotData = BasePlot & {
+type ScatterPlotData = BasePlotData & {
   sizes: number[]
-  strokeColors: number[]
-  fillColors: number[]
-  path: [number, number][]
+  strokeWidths: number[]
+  strokeColors: string[]
+  fillColors: string[]
+  shapes: 'circle'[]
 }
 
-type LinePlotData = BasePlot & {
+type LinePlotData = BasePlotData & {
   color: string
   strokeWidth: number
 }
@@ -25,4 +26,4 @@ type DataPoint = {
 
 type PlotType = 'line' | 'scatter'
 
-export type { ScatterPlotData, LinePlotData, BasePlot, DataPoint, PlotType }
+export type { ScatterPlotData, LinePlotData, BasePlotData, DataPoint, PlotType }

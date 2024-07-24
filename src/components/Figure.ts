@@ -50,6 +50,10 @@ class Figure implements RenderComponent {
     this.engine.setup(this)
     this.engine.update()
   }
+
+  update(): void {
+    this.engine.update()
+  }
 }
 
 type FigureOptions = {

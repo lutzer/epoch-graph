@@ -10,18 +10,15 @@ class D3LinePlot extends D3BasePlot {
     const xScale = this.getScale(component, 0)
     const yScale = this.getScale(component, 1)
 
-    // plot line
+    // generate line data
     const lineFunc = d3
       .line<DataPoint>()
       .x((d) => xScale(d.x))
       .y((d) => yScale(d.y))
 
+    // plot line
     d3.select(svg)
       .append('path')
-      .attr(
-        'transform',
-        `translate(${component.position[0]},${component.position[1]})`
-      )
       .style('stroke', data.color)
       .style('stroke-width', data.strokeWidth)
       .style('fill', 'none')

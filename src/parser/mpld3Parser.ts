@@ -5,7 +5,12 @@ import {
   CanvasData,
   AxisScaleType
 } from '../models/FigureData'
-import { BasePlot, DataPoint, LinePlotData } from '../models/PlotData'
+import {
+  BasePlotData,
+  DataPoint,
+  LinePlotData,
+  ScatterPlotData
+} from '../models/PlotData'
 import { Mpld3Data, Mpld3Position } from './Mpld3Data'
 
 class Mpld3Parser {
@@ -65,18 +70,18 @@ function parseAxis(
   }
 }
 
-function parsePlots(json: Mpld3Data, canvasIndex: number): BasePlot[] {
-  const plots: BasePlot[] = []
+function parsePlots(json: Mpld3Data, canvasIndex: number): BasePlotData[] {
+  const plots: BasePlotData[] = []
 
   const linePlots = json.axes[canvasIndex].lines.map((_, i) =>
     parseLines(json, canvasIndex, i)
   )
   plots.push(...linePlots)
-  8
-  // const scatterPlots = json.axes[canvasIndex].collections.map((_, i) =>
-  //   this.parseCollections(json, canvasIndex, i)
-  // )
-  // plots.push(...scatterPlots)
+
+  const scatterPlots = json.axes[canvasIndex].collections.map((_, i) =>
+    parseCollections(json, canvasIndex, i)
+  )
+  plots.push(...scatterPlots)
 
   return plots
 }
@@ -96,16 +101,28 @@ function parseLines(
   }
 }
 
-// static parseCollections(
-//   json: Mpld3Data,
-//   canvasIndex: number,
-//   pathIndex: number
-// ): ScatterPlotData {
+function parseCollections(
+  json: Mpld3Data,
+  canvasIndex: number,
+  collectionIndex: number
+): ScatterPlotData {
+  const collectionData = json.axes[canvasIndex].collections[collectionIndex]
 
-//   var data : ScatterPlotData = {
-
-//   }
-// }
+  return {
+    points: parseData(
+      json,
+      collectionData.offsets,
+      collectionData.xindex,
+      collectionData.yindex
+    ),
+    type: 'scatter',
+    sizes: collectionData.pathtransforms.map((t) => t[0]),
+    strokeColors: collectionData.edgecolors,
+    strokeWidths: collectionData.edgewidths,
+    fillColors: collectionData.facecolors,
+    shapes: ['circle']
+  }
+}
 
 function parseData(
   json: Mpld3Data,

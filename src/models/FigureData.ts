@@ -1,4 +1,4 @@
-import { BasePlot } from './PlotData'
+import { BasePlotData } from './PlotData'
 
 type BaseData = object
 
@@ -13,7 +13,7 @@ type CanvasData = BaseData & {
   margins: [number, number, number, number] // top, right, bottom, left
   axes: AxisData[]
   background: string
-  plots: BasePlot[]
+  plots: BasePlotData[]
   xScale: CanvasScale
   yScale: CanvasScale
 }
