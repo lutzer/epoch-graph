@@ -14,15 +14,7 @@ class Axis extends BaseComponent<AxisData> implements RenderComponent {
   }
 
   get position(): [number, number] {
-    switch (this.axisPosition) {
-      case AxisPosition.TOP:
-      case AxisPosition.LEFT:
-        return this.parent.position
-      case AxisPosition.RIGHT:
-        return vectors.add(this.parent.position, [this.parent.size[0], 0])
-      case AxisPosition.BOTTOM:
-        return vectors.add(this.parent.position, [0, this.parent.size[1]])
-    }
+    return this.parent.position
   }
 
   get size(): [number, number] {

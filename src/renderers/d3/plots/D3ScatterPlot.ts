@@ -22,20 +22,24 @@ class D3ScatterPlot extends D3BasePlot {
       strokeWidth: data.strokeWidths[i % data.strokeWidths.length]
     }))
 
-    d3.select(svg).selectAll('*').remove()
-
-    d3.select(svg)
-      .selectAll('*')
+    const circles = d3
+      .select(svg)
+      .selectAll<SVGCircleElement, unknown>('circle')
       .data(circleData)
+
+    // update existing circles + add new ones
+    circles
       .enter()
       .append('circle')
+      .merge(circles)
       .attr('cx', (d) => d.cx)
       .attr('cy', (d) => d.cy)
       .attr('r', (d) => d.r)
       .attr('fill', (d) => d.fillColor)
       .attr('stroke', (d) => d.strokeColor)
       .attr('stroke-width', (d) => d.strokeWidth)
-      .exit()
+
+    circles.exit().remove()
   }
 }
 

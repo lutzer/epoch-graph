@@ -5,18 +5,24 @@ import { AxisPosition, AxisScaleType } from '../../models/FigureData'
 
 class D3AxisRenderer extends D3ComponentRenderer<Axis> {
   grid: SVGGElement | null = null
+  axis: SVGGElement | null = null
 
   create(parent: SVGGElement): D3AxisRenderer {
     const classprefix = this.component.coord == 1 ? 'x' : 'y'
     this.svg = d3
       .select(parent)
       .append('g')
-      .attr('class', `axis ${classprefix}-axis`)
+      .attr('class', `axis-container`)
       .node()
     this.grid = d3
       .select(this.svg)
       .append('g')
       .attr('class', `grid ${classprefix}-grid`)
+      .node()
+    this.axis = d3
+      .select(this.svg)
+      .append('g')
+      .attr('class', `axis ${classprefix}-grid`)
       .node()
     return this
   }
@@ -25,6 +31,7 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
       'transform',
       `translate(${this.component.position[0]},${this.component.position[1]})`
     )
+
     const ticks = this.component.ticks
     const range =
       this.component.coord == 0
@@ -39,7 +46,18 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
     const axisGenerator = this.axisPositionFunc()
     const axisSvg = axisGenerator(scale).tickValues(ticks).tickSizeOuter(0)
 
-    d3.select(this.svg!).call(axisSvg)
+    const xOffset =
+      this.component.axisPosition == AxisPosition.RIGHT
+        ? this.component.size[0]
+        : 0
+    const yOffset =
+      this.component.axisPosition == AxisPosition.BOTTOM
+        ? this.component.size[1]
+        : 0
+
+    d3.select(this.axis!)
+      .attr('transform', `translate(${xOffset},${yOffset})`)
+      .call(axisSvg)
 
     // render grid
     this.renderGrid(ticks, scale)
@@ -50,7 +68,7 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
     const p1: [number, number] = [0, 0]
     const p2: [number, number] =
       this.component.coord == 0
-        ? [0, -this.component.size[1]]
+        ? [0, this.component.size[1]]
         : [this.component.size[0], 0]
 
     const line = d3
