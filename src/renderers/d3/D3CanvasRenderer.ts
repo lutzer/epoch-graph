@@ -25,6 +25,7 @@ class D3CanvasRenderer extends D3ComponentRenderer<Canvas> {
     )
     return this
   }
+
   update() {
     d3.select(this.bg)
       .attr('x', this.component.position[0])

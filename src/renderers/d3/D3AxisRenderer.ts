@@ -2,6 +2,7 @@ import * as d3 from 'd3'
 import { D3ComponentRenderer } from './D3BaseComponentRenderer'
 import { Axis } from '../../components/Axis'
 import { AxisPosition, AxisScaleType } from '../../models/FigureData'
+import { scaleUtils } from '../../helpers/scaleUtils'
 
 class D3AxisRenderer extends D3ComponentRenderer<Axis> {
   grid: SVGGElement | null = null
@@ -58,7 +59,7 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
       .tickSizeOuter(0)
       .tickFormat((v) => {
         return this.component.isLogarithmic()
-          ? new Number(v).toExponential(0)
+          ? scaleUtils.convertToExponential(v as number, 3)
           : v.toString()
       })
       .tickPadding(this.component.style.canvas.axis.ticks.spacing)

@@ -60,12 +60,21 @@
       figure.show()
 
       const styles = [style1_data, style2_data]
+
+      const selectedStyle = localStorage.getItem('selectedStyle') || 0
+      loadStyle(selectedStyle)
+
+      function loadStyle(index) {
+        figure.style = StyleParser.parse(styles[index])
+        figure.update()
+      }
+
       document
         .getElementById('choices')
         .addEventListener('change', function (event) {
           const selectedValue = event.target.value
-          figure.style = StyleParser.parse(styles[selectedValue])
-          figure.update()
+          localStorage.setItem('selectedStyle', selectedValue)
+          loadStyle(selectedValue)
         })
     </script>
   </body>

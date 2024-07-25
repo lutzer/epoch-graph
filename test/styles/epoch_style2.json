@@ -1,7 +1,7 @@
 {
   "title": {
     "font": {
-      "fontFamily": "Courier, sans-serif",
+      "fontFamily": "Courier, monospace",
       "fontSize": "24px",
       "textAnchor": "middle"
     },
@@ -14,21 +14,23 @@
     "axis": {
       "xLabel": {
         "font": {
-          "fontFamily": "Courier, sans-serif",
-          "textAnchor": "end"
+          "fontFamily": "Courier, monospace",
+          "textAnchor": "end",
+          "fontSize": "16px"
         },
         "translate": ["100%", "50px"]
       },
       "yLabel": {
         "font": {
-          "fontFamily": "Courier, sans-serif"
+          "fontFamily": "Courier, monospace",
+          "fontSize": "16px"
         },
         "translate": ["-55px", "-15px"]
       },
       "ticks": {
         "font": {
-          "fontFamily": "Courier, sans-serif",
-          "fontSize": "15px",
+          "fontFamily": "Courier, monospace",
+          "fontSize": "12px",
           "color": "black",
           "fontWeight": 400,
           "textAnchor": "start"

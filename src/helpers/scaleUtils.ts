@@ -26,6 +26,19 @@ class scaleUtils {
       ? scaleLinear(range).domain(domain)
       : scaleLog(range).domain(domain)
   }
+
+  // converts number to exponential number with sensible digits
+  static convertToExponential(value: number, maxDigits: number): string {
+    const numberText = value.toExponential(maxDigits)
+    const [fractionalDigits, exponent] = numberText.split('e+')
+    const fractionalDigitsReduced = [...fractionalDigits].reduceRight(
+      (acc, c) => {
+        return (c != '0' && c != '.') || acc.length > 0 ? c + acc : acc
+      },
+      ''
+    )
+    return `${fractionalDigitsReduced}e${exponent}`
+  }
 }
 
 export { scaleUtils }

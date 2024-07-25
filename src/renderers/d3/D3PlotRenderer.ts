@@ -12,8 +12,10 @@ class D3PlotRenderer extends D3ComponentRenderer<Plot> {
       .append('svg')
       .attr('class', `plot ${this.component.data.type}`)
       .node()
+
     return this
   }
+
   update(): void {
     d3.select(this.svg)
       .attr('x', this.component.position[0])
