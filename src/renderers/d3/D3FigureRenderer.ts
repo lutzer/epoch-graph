@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 import { Figure } from '../../components/Figure'
 import { D3ComponentRenderer } from './D3BaseComponentRenderer'
 import { D3CanvasRenderer } from './D3CanvasRenderer'
-import { D3StyleUtils } from './D3StyleUtils'
+import { D3Utils } from './D3Utils'
 
 class D3FigureRenderer extends D3ComponentRenderer<Figure> {
   canvasRenderers: D3CanvasRenderer[] = []
@@ -18,6 +18,7 @@ class D3FigureRenderer extends D3ComponentRenderer<Figure> {
       .select(this.svg)
       .append('text')
       .attr('class', 'title')
+      .style('dominant-baseline', 'hanging')
       .node()
     this.logo = d3.select(this.svg).append('image').attr('class', 'logo').node()
 
@@ -33,16 +34,20 @@ class D3FigureRenderer extends D3ComponentRenderer<Figure> {
       .attr('height', this.component.size[1])
       .attr('viewBox', [0, 0, this.component.size[0], this.component.size[1]])
 
-    d3.select(this.style).text(
-      D3StyleUtils.createCssFromStyle(this.component.style)
+    d3.select(this.style).text(D3Utils.createCssFromStyle(this.component.style))
+
+    D3Utils.createWrappedText(
+      this.title!,
+      this.component.data!.title,
+      this.component.size[0] * 0.5,
+      `${this.component.style.title.font.fontSize} ${this.component.style.title.font.fontFamily}`,
+      1.0
     )
-    d3.select(this.title)
-      .text(this.component.data!.title)
-      .style(
-        'transform',
-        `translate(${this.component.style.title.translate[0]},${this.component.style.title.translate[1]})`
-      )
-      .style('dominant-baseline', 'hanging')
+
+    d3.select(this.title).style(
+      'transform',
+      `translate(${this.component.style.title.translate[0]},${this.component.style.title.translate[1]})`
+    )
 
     d3.select(this.logo)
       .attr('xlink:href', this.component.style.logo.src)

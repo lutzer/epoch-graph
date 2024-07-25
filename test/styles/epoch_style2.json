@@ -1,0 +1,48 @@
+{
+  "title": {
+    "font": {
+      "fontFamily": "Courier, sans-serif",
+      "fontSize": "24px",
+      "textAnchor": "middle"
+    },
+    "translate": ["50%", "50px"]
+  },
+  "margins": [70, 0, 0, 0],
+  "canvas": {
+    "stroke": { "color": "transaprent", "width": 2 },
+    "fill": { "color": "#adc891" },
+    "axis": {
+      "xLabel": {
+        "font": {
+          "fontFamily": "Courier, sans-serif",
+          "textAnchor": "end"
+        },
+        "translate": ["100%", "50px"]
+      },
+      "yLabel": {
+        "font": {
+          "fontFamily": "Courier, sans-serif"
+        },
+        "translate": ["-55px", "-15px"]
+      },
+      "ticks": {
+        "font": {
+          "fontFamily": "Courier, sans-serif",
+          "fontSize": "15px",
+          "color": "black",
+          "fontWeight": 400,
+          "textAnchor": "start"
+        },
+        "spacing": 10
+      },
+      "grid": { "color": "white", "width": 1 },
+      "line": { "color": "black", "width": 1 }
+    }
+  },
+  "logo": {
+    "src": "/assets/epoch-logo-small.jpeg",
+    "size": [120, 35],
+    "anchor": [0.5, 0],
+    "offset": [-60, 0]
+  }
+}

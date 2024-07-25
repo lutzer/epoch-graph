@@ -27,24 +27,44 @@
       right: 0;
       margin: 50px;
     }
+
+    #style-selector {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
   </style>
   <body>
     <div id="figure-container"></div>
-    <script type="module">
-      import { Figure } from './src/index.ts'
-      import json from './test/mocks/mpld3_nm.json'
+    <div id="style-selector">
+      <label for="choices">Select style:</label>
+      <select id="choices" name="choices">
+        <option value="0">Style1</option>
+        <option value="1">Style2</option>
+      </select>
+    </div>
 
-      console.log(json)
+    <script type="module">
+      import { Figure, StyleParser } from './src/index.ts'
+      import chart_data from './test/mocks/mpld3_nm.json'
+
+      import style1_data from './test/styles/epoch_style1.json'
+      import style2_data from './test/styles/epoch_style2.json'
 
       var figure = Figure.d3(document.getElementById('figure-container'), {
         reponsive: true
       })
-
-      figure.fromMpld3(json)
-
-      console.log(figure.data)
-
+      figure.fromMpld3(chart_data)
       figure.show()
+
+      const styles = [style1_data, style2_data]
+      document
+        .getElementById('choices')
+        .addEventListener('change', function (event) {
+          const selectedValue = event.target.value
+          figure.style = StyleParser.parse(styles[selectedValue])
+          figure.update()
+        })
     </script>
   </body>
 </html>

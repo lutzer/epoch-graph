@@ -1,6 +1,57 @@
+import * as d3 from 'd3'
 import { FigureStyle, FontStyle, StrokeStyle } from '../../models/StyleData'
 
-class D3StyleUtils {
+class D3Utils {
+  static createWrappedText(
+    textElement: SVGTextElement,
+    text: string,
+    maxWidth: number,
+    font: string,
+    lineHeight: number = 1.2
+  ) {
+    function getTextWidth(
+      text: string,
+      font: string,
+      canvas: HTMLCanvasElement
+    ): number {
+      const context = canvas.getContext('2d')!
+      context.font = font
+      const metrics = context.measureText(text)
+      return metrics.width
+    }
+
+    const canvas: HTMLCanvasElement =
+      document.querySelector('canvas') || document.createElement('canvas')
+
+    const lines = text.split(' ').reduce(
+      (acc, word) => {
+        acc[acc.length - 1] += word + ' '
+        const width = getTextWidth(acc[acc.length - 1], font, canvas)
+        if (width > maxWidth) {
+          acc.push('')
+        }
+        return acc
+      },
+      ['']
+    )
+
+    const d3Text = d3.select(textElement)
+
+    const tspans = d3Text
+      .selectAll<SVGTSpanElement, unknown>('tspan')
+      .data(lines)
+
+    tspans
+      .enter()
+      .append('tspan')
+      .merge(tspans)
+      .attr('x', 0)
+      .attr('dy', (d, i) => `${i === 0 ? 0 : lineHeight}em`)
+      .text((d) => d.trim())
+      .exit()
+      .remove()
+  }
+
   static createCssFromStyle(style: FigureStyle): string {
     const cssClasses = {
       '.title': parseFontStyle(style.title.font),
@@ -52,4 +103,4 @@ function createPropertyString(
     }, '')
 }
 
-export { D3StyleUtils }
+export { D3Utils }

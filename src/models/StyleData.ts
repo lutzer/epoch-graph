@@ -5,7 +5,6 @@ type FigureStyle = BaseStyleData & {
     font: FontStyle
     translate: [string, string]
   }
-  background: FillStyle
   margins: [number, number, number, number]
   canvas: {
     stroke: StrokeStyle
@@ -62,11 +61,10 @@ const defaultFontStyle: FontStyle = {
 
 const defaultFigureStyle: FigureStyle = {
   title: {
-    font: { ...defaultFontStyle, fontSize: '32px', fontWeight: 400 },
+    font: { ...defaultFontStyle, fontSize: '28px', fontWeight: 400 },
     translate: ['10px', '10px']
   },
-  background: { color: 'cyan' },
-  margins: [30, 0, 0, 0],
+  margins: [50, 0, 0, 0],
 
   canvas: {
     stroke: {
@@ -109,9 +107,9 @@ const defaultFigureStyle: FigureStyle = {
   },
   logo: {
     src: '/assets/epoch-logo.svg',
-    size: [180, 35],
+    size: [150, 25],
     anchor: [1, 0],
-    offset: [-210, 10]
+    offset: [-180, 10]
   }
 }
 export { defaultFigureStyle }
