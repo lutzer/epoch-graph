@@ -32,9 +32,10 @@ function parseFontStyle(style: FontStyle, omitProperty: string[] = []): string {
   const cssProperties = {
     'font-family': style.fontFamily,
     'font-size': `${style.fontSize}`,
-    color: style.color,
+    color: `${style.color}`,
     'font-weight': style.fontWeight,
-    'text-anchor': style.textAnchor
+    'text-anchor': style.textAnchor,
+    fill: style.color
   }
   return createPropertyString(cssProperties, omitProperty)
 }

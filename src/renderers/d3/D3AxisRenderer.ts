@@ -12,7 +12,7 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
     const classprefix = this.component.coord == 0 ? 'x' : 'y'
     this.svg = d3
       .select(parent)
-      .append('g')
+      .append('svg')
       .attr('class', `axis-container`)
       .node()
     this.grid = d3
@@ -32,11 +32,14 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
       .node()
     return this
   }
+
   update() {
-    d3.select(this.svg).attr(
-      'transform',
-      `translate(${this.component.position[0]},${this.component.position[1]})`
-    )
+    d3.select(this.svg)
+      .attr('x', this.component.position[0])
+      .attr('y', this.component.position[1])
+      .attr('width', this.component.size[0])
+      .attr('height', this.component.size[1])
+      .style('overflow', 'visible')
 
     const ticks = this.component.ticks
     const range =

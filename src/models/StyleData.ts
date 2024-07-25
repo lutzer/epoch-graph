@@ -27,7 +27,6 @@ type FigureStyle = BaseStyleData & {
       line: StrokeStyle
     }
   }
-  annotationText: FontStyle
   logo: {
     src: string
     size: [number, number]
@@ -40,7 +39,7 @@ type FontStyle = BaseStyleData & {
   fontFamily: string
   fontSize: string
   color: string
-  fontWeight: 'normal' | 'bold'
+  fontWeight: number
   textAnchor: 'start' | 'middle' | 'end'
 }
 
@@ -54,16 +53,16 @@ type FillStyle = BaseStyleData & {
 }
 
 const defaultFontStyle: FontStyle = {
-  fontFamily: 'Arial, sans-serif',
+  fontFamily: 'Inter, sans-serif',
   fontSize: '12px',
-  color: '#171717',
-  fontWeight: 'normal',
+  color: 'black',
+  fontWeight: 400,
   textAnchor: 'start'
 }
 
 const defaultFigureStyle: FigureStyle = {
   title: {
-    font: { ...defaultFontStyle, fontSize: '30px' },
+    font: { ...defaultFontStyle, fontSize: '32px', fontWeight: 400 },
     translate: ['10px', '10px']
   },
   background: { color: 'cyan' },
@@ -81,7 +80,7 @@ const defaultFigureStyle: FigureStyle = {
           ...defaultFontStyle,
           fontSize: '16px',
           textAnchor: 'middle',
-          fontWeight: 'bold'
+          fontWeight: 600
         },
         translate: ['50%', '50px']
       },
@@ -90,9 +89,9 @@ const defaultFigureStyle: FigureStyle = {
           ...defaultFontStyle,
           fontSize: '16px',
           textAnchor: 'start',
-          fontWeight: 'bold'
+          fontWeight: 600
         },
-        translate: ['-55px', '-10px']
+        translate: ['-55px', '-15px']
       },
       ticks: {
         font: { ...defaultFontStyle, fontSize: '15px' },
@@ -108,12 +107,11 @@ const defaultFigureStyle: FigureStyle = {
       }
     }
   },
-  annotationText: defaultFontStyle,
   logo: {
     src: '/assets/epoch-logo.svg',
-    size: [150, 23],
+    size: [180, 35],
     anchor: [1, 0],
-    offset: [-170, 10]
+    offset: [-210, 10]
   }
 }
 export { defaultFigureStyle }
