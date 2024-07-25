@@ -27,7 +27,7 @@ class Mpld3Parser {
 
 function parseCanvas(json: Mpld3Data, canvasIndex: number): CanvasData {
   return {
-    margins: [30, 30, 30, 60],
+    margins: [60, 30, 60, 60],
     axes: json.axes[canvasIndex].axes.map((_, i) =>
       parseAxis(json, canvasIndex, i)
     ),

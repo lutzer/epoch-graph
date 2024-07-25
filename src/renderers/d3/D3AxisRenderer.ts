@@ -6,9 +6,10 @@ import { AxisPosition, AxisScaleType } from '../../models/FigureData'
 class D3AxisRenderer extends D3ComponentRenderer<Axis> {
   grid: SVGGElement | null = null
   axis: SVGGElement | null = null
+  label: SVGTextElement | null = null
 
   create(parent: SVGGElement): D3AxisRenderer {
-    const classprefix = this.component.coord == 1 ? 'x' : 'y'
+    const classprefix = this.component.coord == 0 ? 'x' : 'y'
     this.svg = d3
       .select(parent)
       .append('g')
@@ -22,7 +23,12 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
     this.axis = d3
       .select(this.svg)
       .append('g')
-      .attr('class', `axis ${classprefix}-grid`)
+      .attr('class', `axis ${classprefix}-axis`)
+      .node()
+    this.label = d3
+      .select(this.svg)
+      .append('text')
+      .attr('class', `axis-label ${classprefix}-axis`)
       .node()
     return this
   }
@@ -70,6 +76,20 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
 
     // render grid
     this.renderGrid(ticks, scale)
+
+    // render label
+    const style =
+      this.component.coord == 0
+        ? this.component.style.canvas.axis.xLabel
+        : this.component.style.canvas.axis.yLabel
+    d3.select(this.label!)
+      .text(this.component.data.label)
+      .attr('x', xOffset)
+      .attr('y', yOffset)
+      .style(
+        'transform',
+        `translate(${style.translate[0]},${style.translate[1]})`
+      )
   }
 
   renderGrid(ticks: number[], scale: d3.ScaleLinear<number, number, never>) {

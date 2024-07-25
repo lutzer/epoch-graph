@@ -11,8 +11,13 @@ type FigureStyle = BaseStyleData & {
     stroke: StrokeStyle
     fill: FillStyle
     axis: {
-      labels: {
+      xLabel: {
         font: FontStyle
+        translate: [string, string]
+      }
+      yLabel: {
+        font: FontStyle
+        translate: [string, string]
       }
       ticks: {
         font: FontStyle
@@ -71,8 +76,23 @@ const defaultFigureStyle: FigureStyle = {
     },
     fill: { color: 'transparent' },
     axis: {
-      labels: {
-        font: { ...defaultFontStyle, fontSize: '20px' }
+      xLabel: {
+        font: {
+          ...defaultFontStyle,
+          fontSize: '16px',
+          textAnchor: 'middle',
+          fontWeight: 'bold'
+        },
+        translate: ['50%', '50px']
+      },
+      yLabel: {
+        font: {
+          ...defaultFontStyle,
+          fontSize: '16px',
+          textAnchor: 'start',
+          fontWeight: 'bold'
+        },
+        translate: ['-55px', '-10px']
       },
       ticks: {
         font: { ...defaultFontStyle, fontSize: '15px' },
