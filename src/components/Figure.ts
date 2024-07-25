@@ -5,9 +5,11 @@ import { Canvas } from './Canvas'
 import { Mpld3Parser } from '../parser/Mpld3Parser'
 import { RenderComponent } from './RenderComponent'
 import { Mpld3Data } from '../parser/Mpld3Data'
+import { defaultFigureStyle, FigureStyle } from '../models/StyleData'
 
 class Figure implements RenderComponent {
   _data: FigureData | null = null
+  _style: FigureStyle = defaultFigureStyle
 
   canvases: Canvas[] = []
 
@@ -26,6 +28,14 @@ class Figure implements RenderComponent {
     if (this.data == null) return
     this.data.width = size[0]
     this.data.height = size[1]
+  }
+
+  set style(style: FigureStyle) {
+    this._style = style
+  }
+
+  get style(): FigureStyle {
+    return this._style
   }
 
   set data(data: FigureData) {

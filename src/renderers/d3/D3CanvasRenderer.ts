@@ -31,7 +31,9 @@ class D3CanvasRenderer extends D3ComponentRenderer<Canvas> {
       .attr('y', this.component.position[1])
       .attr('width', this.component.size[0])
       .attr('height', this.component.size[1])
-      .attr('fill', this.component.data.background)
+      .attr('fill', this.component.style.canvas.fill.color)
+      .attr('stroke', this.component.style.canvas.stroke.color)
+      .attr('stroke-width', this.component.style.canvas.stroke.width)
     this.axisRenderers.forEach((r) => r.update())
     this.plotRenderers.forEach((r) => r.update())
   }

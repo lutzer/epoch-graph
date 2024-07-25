@@ -5,11 +5,11 @@ type BaseData = object
 type FigureData = BaseData & {
   width: number
   height: number
+  title: string
   canvases: CanvasData[]
 }
 
 type CanvasData = BaseData & {
-  title: string
   margins: [number, number, number, number] // top, right, bottom, left
   axes: AxisData[]
   background: string
@@ -28,6 +28,7 @@ type AxisData = BaseData & {
     numberOfTicks: number
     values: number[]
   }
+  label: string | null
 }
 
 type CanvasScale = {

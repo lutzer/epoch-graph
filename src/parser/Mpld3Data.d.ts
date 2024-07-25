@@ -12,6 +12,9 @@ type Mpld3Data = {
     lines: Lines[]
     collections: Collections[]
     axesbg: string
+    texts: {
+      text: string
+    }[]
   }[]
   data: {
     [key: string]: number[][]

@@ -49,9 +49,10 @@ class D3AxisRenderer extends D3ComponentRenderer<Axis> {
       .tickSizeOuter(0)
       .tickFormat((v) => {
         return this.component.isLogarithmic()
-          ? new Number(v).toExponential(1)
+          ? new Number(v).toExponential(0)
           : v.toString()
       })
+      .tickPadding(this.component.style.canvas.axis.ticks.spacing)
 
     // calculate offsets for axis on bottom or right
     const xOffset =

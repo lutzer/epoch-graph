@@ -18,6 +18,7 @@ class Mpld3Parser {
     const figure: FigureData = {
       width: json.width,
       height: json.height,
+      title: json.axes[0].texts[2].text,
       canvases: json.axes.map((_, i) => parseCanvas(json, i))
     }
     return figure
@@ -26,8 +27,7 @@ class Mpld3Parser {
 
 function parseCanvas(json: Mpld3Data, canvasIndex: number): CanvasData {
   return {
-    title: 'Title',
-    margins: [20, 20, 20, 80],
+    margins: [30, 30, 30, 60],
     axes: json.axes[canvasIndex].axes.map((_, i) =>
       parseAxis(json, canvasIndex, i)
     ),
@@ -67,7 +67,8 @@ function parseAxis(
     ticks: {
       numberOfTicks: axisData.nticks,
       values: axisData.tickvalues || []
-    }
+    },
+    label: json.axes[canvasIndex].texts[axisIndex].text
   }
 }
 

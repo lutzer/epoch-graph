@@ -7,14 +7,16 @@ import {
 } from '../models/FigureData.ts'
 import { BaseComponent } from './BaseComponent'
 import { Canvas } from './Canvas.ts'
+import { Figure } from './Figure.ts'
 import { RenderComponent } from './RenderComponent'
 
 class Axis extends BaseComponent<AxisData> implements RenderComponent {
   constructor(
     data: AxisData,
-    public parent: Canvas
+    public parent: Canvas,
+    figure: Figure
   ) {
-    super(data)
+    super(data, figure)
   }
 
   get position(): [number, number] {
